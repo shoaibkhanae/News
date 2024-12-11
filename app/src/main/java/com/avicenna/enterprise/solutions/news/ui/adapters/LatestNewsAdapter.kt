@@ -37,7 +37,8 @@ class LatestNewsAdapter(private val dataset: List<Article>)
         val current = dataset[position]
 
         holder.image.load(current.urlToImage) {
-            placeholder()
+            crossfade(true)
+            placeholder(R.drawable.placeholder)
         }
         holder.title.text = current.title
         holder.author.text = current.author
