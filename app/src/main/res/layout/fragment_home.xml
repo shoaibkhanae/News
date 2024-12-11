@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/basic_padding"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.HomeFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxCornerRadiusBottomStart="@dimen/corner_padding"
+        app:boxCornerRadiusTopStart="@dimen/corner_padding"
+        app:boxCornerRadiusBottomEnd="@dimen/corner_padding"
+        app:boxCornerRadiusTopEnd="@dimen/corner_padding"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:hint="@string/search" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_latest_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/latest_news"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/basic_padding"
+        app:layout_constraintTop_toBottomOf="@id/til_search"
+        app:layout_constraintStart_toStartOf="@id/til_search"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_latest_news"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/recycler_width"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="@dimen/basic_padding"
+        app:layout_constraintTop_toBottomOf="@id/tv_latest_news"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/hs_category_chip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/basic_padding"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_latest_news">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ch_business"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipCornerRadius="@dimen/basic_padding"
+                app:chipBackgroundColor="@color/bg_chip_state_list"
+                android:checked="true"
+                android:clickable="true"
+                android:checkable="true"
+                android:focusable="true"
+                android:text="@string/business" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ch_entertainment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipCornerRadius="@dimen/basic_padding"
+                android:text="@string/entertainment"
+                app:chipBackgroundColor="@color/bg_chip_state_list"
+                android:clickable="true"
+                android:checkable="true"
+                android:focusable="true"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ch_general"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipCornerRadius="@dimen/basic_padding"
+                android:text="@string/general"
+                app:chipBackgroundColor="@color/bg_chip_state_list"
+                android:clickable="true"
+                android:checkable="true"
+                android:focusable="true"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ch_health"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipCornerRadius="@dimen/basic_padding"
+                android:text="@string/health"
+                app:chipBackgroundColor="@color/bg_chip_state_list"
+                android:clickable="true"
+                android:checkable="true"
+                android:focusable="true"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ch_science"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipCornerRadius="@dimen/basic_padding"
+                android:text="@string/science"
+                app:chipBackgroundColor="@color/bg_chip_state_list"
+                android:clickable="true"
+                android:checkable="true"
+                android:focusable="true"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ch_sports"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipCornerRadius="@dimen/basic_padding"
+                android:text="@string/sports"
+                app:chipBackgroundColor="@color/bg_chip_state_list"
+                android:clickable="true"
+                android:checkable="true"
+                android:focusable="true"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ch_technology"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipCornerRadius="@dimen/basic_padding"
+                android:text="@string/technology"
+                app:chipBackgroundColor="@color/bg_chip_state_list"
+                android:clickable="true"
+                android:checkable="true"
+                android:focusable="true"/>
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_categories"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="@dimen/normal_padding"
+        app:layout_constraintTop_toBottomOf="@id/hs_category_chip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
