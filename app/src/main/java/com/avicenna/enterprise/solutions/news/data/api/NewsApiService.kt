@@ -10,9 +10,13 @@ interface NewsApiService {
 
     @GET("top-headlines")
     suspend fun getNews(
-        @Query("country") country: String = "us",
+        @Query("country") countryCode: String = "us",
         @Query("apikey") apiKey: String = AppConstants.API_KEY
     ): Response<News>
 
-
+    @GET("top-headlines")
+    suspend fun getNews(
+        @Query("country") countryCode: String = "us",
+        @Query("apikey") apiKey: String = AppConstants.API_KEY
+    ): Response<News>
 }

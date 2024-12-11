@@ -48,6 +48,14 @@ dependencies {
     // navigation
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.andoridx.naviggation.ui)
+    // live data
+    implementation(libs.androidx.lifecycle.livedata)
+    // viewmodel
+    implementation(libs.androidx.lifecycle.viewmodel)
+    // coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+    // coil
+    implementation("io.coil-kt:coil:2.6.0")
     // retrofit
     implementation(libs.square.retrofit)
     implementation(libs.retrofit.converter)
