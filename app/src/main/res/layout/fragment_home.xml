@@ -39,10 +39,29 @@
         app:layout_constraintTop_toBottomOf="@id/til_search"
         app:layout_constraintStart_toStartOf="@id/til_search"/>
 
+    <TextView
+        android:id="@+id/tv_see_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/see_all"
+        android:layout_marginEnd="@dimen/normal_padding"
+        android:textColor="@color/blue_0080FF"
+        app:layout_constraintTop_toTopOf="@id/tv_latest_news"
+        app:layout_constraintEnd_toStartOf="@id/iv_arrow"/>
+
+    <ImageView
+        android:id="@+id/iv_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrorw"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_latest_news"
+        app:layout_constraintBottom_toBottomOf="@id/tv_latest_news"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_latest_news"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/recycler_width"
+        android:layout_height="@dimen/recycler_height"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginTop="@dimen/basic_padding"
         app:layout_constraintTop_toBottomOf="@id/tv_latest_news"

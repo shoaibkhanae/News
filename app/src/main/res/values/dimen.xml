@@ -3,5 +3,5 @@
     <dimen name="basic_padding">16dp</dimen>
     <dimen name="normal_padding">8dp</dimen>
     <dimen name="corner_padding">25dp</dimen>
-    <dimen name="recycler_width">150dp</dimen>
+    <dimen name="recycler_height">200dp</dimen>
 </resources>
