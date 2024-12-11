@@ -45,8 +45,13 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    // navigation
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.andoridx.naviggation.ui)
+    // retrofit
+    implementation(libs.square.retrofit)
+    implementation(libs.retrofit.converter)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
