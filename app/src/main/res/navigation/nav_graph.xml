@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_contentFragment"
+            app:destination="@id/contentFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.avicenna.enterprise.solutions.news.ui.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/contentFragment"
+        android:name="com.avicenna.enterprise.solutions.news.ui.fragments.ContentFragment"
+        android:label="fragment_content"
+        tools:layout="@layout/fragment_content" />
 </navigation>
