@@ -22,4 +22,12 @@ interface NewsApiService {
         @Query("category") category: String
     ): Response<News>
 
+    @GET("everything")
+    suspend fun searchNews(
+        @Query("q") search: String,
+        @Query("apikey") apiKey: String = AppConstants.API_KEY
+    ): Response<News>
+
+
+
 }

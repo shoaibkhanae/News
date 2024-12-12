@@ -7,7 +7,7 @@ import com.avicenna.enterprise.solutions.news.data.model.News
 import com.avicenna.enterprise.solutions.news.data.repository.NewsRepository
 import kotlinx.coroutines.launch
 
-class NewsViewModel(private val repository: NewsRepository) : ViewModel() {
+class HomeViewModel(private val repository: NewsRepository) : ViewModel() {
     val news: LiveData<News> = repository.news
     val category: LiveData<News> = repository.category
 

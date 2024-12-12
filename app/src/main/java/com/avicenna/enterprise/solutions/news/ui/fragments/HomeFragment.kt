@@ -11,16 +11,16 @@ import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.databinding.FragmentHomeBinding
 import com.avicenna.enterprise.solutions.news.ui.adapters.NewsAdapter
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.NewsViewModel
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.NewsViewModelFactor
+import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModel
+import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModelFactory
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     val binding
         get() = _binding!!
 
-    private val viewModel: NewsViewModel by viewModels {
-        NewsViewModelFactory((requireActivity().application as MyApplication).repository)
+    private val homeViewModel: HomeViewModel by viewModels {
+        HomeViewModelFactory((requireActivity().application as MyApplication).repository)
     }
 
     override fun onCreateView(
@@ -49,37 +49,37 @@ class HomeFragment : Fragment() {
 
     private fun showNewsWithCategory() {
         binding.chHealth.setOnClickListener {
-            viewModel.getNewsWithCategory("health")
+            homeViewModel.getNewsWithCategory("health")
         }
         binding.chSports.setOnClickListener {
-            viewModel.getNewsWithCategory("sports")
+            homeViewModel.getNewsWithCategory("sports")
         }
         binding.chGeneral.setOnClickListener {
-            viewModel.getNewsWithCategory("general")
+            homeViewModel.getNewsWithCategory("general")
         }
         binding.chScience.setOnClickListener {
-            viewModel.getNewsWithCategory("science")
+            homeViewModel.getNewsWithCategory("science")
         }
         binding.chBusiness.setOnClickListener {
-            viewModel.getNewsWithCategory("business")
+            homeViewModel.getNewsWithCategory("business")
         }
         binding.chEntertainment.setOnClickListener {
-            viewModel.getNewsWithCategory("entertainment")
+            homeViewModel.getNewsWithCategory("entertainment")
         }
         binding.chTechnology.setOnClickListener {
-            viewModel.getNewsWithCategory("technology")
+            homeViewModel.getNewsWithCategory("technology")
         }
     }
 
     private fun setupLatestNewsUI() {
-        viewModel.news.observe(viewLifecycleOwner) {
+        homeViewModel.news.observe(viewLifecycleOwner) {
             val adapter = NewsAdapter(it.articles, 1)
             binding.rvLatestNews.adapter = adapter
         }
     }
 
     private fun setupCategoryNewsUI() {
-        viewModel.category.observe(viewLifecycleOwner) {
+        homeViewModel.category.observe(viewLifecycleOwner) {
             val adapter = NewsAdapter(it.articles, 2)
             binding.rvCategories.adapter = adapter
         }
