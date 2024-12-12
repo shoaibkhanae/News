@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.data.model.Article
+import com.avicenna.enterprise.solutions.news.data.model.News
 import com.avicenna.enterprise.solutions.news.databinding.FragmentHomeBinding
 import com.avicenna.enterprise.solutions.news.ui.adapters.NewsAdapter
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModel
@@ -84,6 +85,13 @@ class HomeFragment : Fragment() {
         homeViewModel.news.observe(viewLifecycleOwner) {
             val adapter = NewsAdapter(it.articles, 1)
             binding.rvLatestNews.adapter = adapter
+
+            adapter.articleSelectedListener = object : NewsAdapter.ArticleSelectedListener {
+                override fun articleSelected(article: Article) {
+                    homeViewModel.select(article)
+                    goToContentFragment()
+                }
+            }
         }
     }
 
@@ -91,7 +99,18 @@ class HomeFragment : Fragment() {
         homeViewModel.category.observe(viewLifecycleOwner) {
             val adapter = NewsAdapter(it.articles, 2)
             binding.rvCategories.adapter = adapter
+
+            adapter.articleSelectedListener = object : NewsAdapter.ArticleSelectedListener {
+                override fun articleSelected(article: Article) {
+                    homeViewModel.select(article)
+                    goToContentFragment()
+                }
+            }
         }
+    }
+
+    private fun goToContentFragment() {
+        findNavController().navigate(R.id.action_homeFragment_to_contentFragment)
     }
 
     private fun goToSearchFragment() {

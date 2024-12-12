@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.data.model.Article
+import com.google.android.material.card.MaterialCardView
 
 class NewsAdapter(private val dataset: List<Article>, val type: Int)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -18,11 +19,13 @@ class NewsAdapter(private val dataset: List<Article>, val type: Int)
         var image: ImageView
         var title: TextView
         var author: TextView
+        var card: MaterialCardView
 
         init {
             image = view.findViewById(R.id.iv_news)
             title = view.findViewById(R.id.tv_title)
             author = view.findViewById(R.id.tv_author)
+            card = view.findViewById(R.id.cd_category_article)
         }
 
         fun bind(article: Article) {
@@ -35,6 +38,9 @@ class NewsAdapter(private val dataset: List<Article>, val type: Int)
             }
             title.text = article.title
             author.text = article.author
+            card.setOnClickListener {
+                articleSelectedListener.articleSelected(article)
+            }
         }
     }
 
@@ -42,11 +48,13 @@ class NewsAdapter(private val dataset: List<Article>, val type: Int)
         var image: ImageView
         var title: TextView
         var author: TextView
+        var card: MaterialCardView
 
         init {
             image = view.findViewById(R.id.iv_latest_news)
             title = view.findViewById(R.id.tv_latest_title)
             author = view.findViewById(R.id.tv_latest_author)
+            card = view.findViewById(R.id.cd_latest_article)
         }
 
         fun bind(article: Article) {
@@ -59,6 +67,9 @@ class NewsAdapter(private val dataset: List<Article>, val type: Int)
             }
             title.text = article.title
             author.text = article.author
+            card.setOnClickListener {
+                articleSelectedListener.articleSelected(article)
+            }
         }
     }
 
@@ -73,6 +84,12 @@ class NewsAdapter(private val dataset: List<Article>, val type: Int)
             .inflate(R.layout.category_news_item, parent, false)
         return CategoryNewsViewHolder(view)
     }
+
+    interface ArticleSelectedListener {
+        fun articleSelected(article: Article)
+    }
+
+    lateinit var articleSelectedListener : ArticleSelectedListener
 
 
     override fun getItemCount(): Int = dataset.size

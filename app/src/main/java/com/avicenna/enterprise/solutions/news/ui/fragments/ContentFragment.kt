@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.transition.TransitionInflater
+import coil.load
 import com.avicenna.enterprise.solutions.news.MyApplication
+import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.databinding.FragmentContentBinding
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModel
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModelFactory
@@ -48,7 +50,16 @@ class ContentFragment : Fragment() {
 
     private fun showArticleContent() {
         homeViewModel.selected.observe(viewLifecycleOwner) { article ->
-
+            binding.apply {
+                ivNews.load(article.urlToImage) {
+                    crossfade(true)
+                    placeholder(R.drawable.placeholder)
+                    error(R.drawable.news_placeholder)
+                }
+                tvTitle.text = article.title
+                tvAuthor.text = article.author
+                tvContent.text = article.content
+            }
         }
     }
 

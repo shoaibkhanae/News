@@ -70,6 +70,6 @@
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="60dp"/>
+            android:layout_marginTop="150dp"/>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
