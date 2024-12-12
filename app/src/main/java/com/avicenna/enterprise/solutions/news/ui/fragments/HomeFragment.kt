@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.avicenna.enterprise.solutions.news.MyApplication
+import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.databinding.FragmentHomeBinding
 import com.avicenna.enterprise.solutions.news.ui.adapters.NewsAdapter
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.NewsViewModel
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.NewsViewModelFactory
+import com.avicenna.enterprise.solutions.news.ui.viewmodels.NewsViewModelFactor
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -40,6 +42,9 @@ class HomeFragment : Fragment() {
         showNewsWithCategory()
         setupLatestNewsUI()
         setupCategoryNewsUI()
+        binding.cdSearch.setOnClickListener {
+            goToSearchFragment()
+        }
     }
 
     private fun showNewsWithCategory() {
@@ -78,6 +83,10 @@ class HomeFragment : Fragment() {
             val adapter = NewsAdapter(it.articles, 2)
             binding.rvCategories.adapter = adapter
         }
+    }
+
+    private fun goToSearchFragment() {
+        findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
     }
 
 
