@@ -10,11 +10,25 @@ class NewsRepository(private val apiService: NewsApiService) {
     private val _news = MutableLiveData<News>()
     val news: LiveData<News> = _news
 
+    private val _category = MutableLiveData<News>()
+    val category: LiveData<News> = _category
+
     suspend fun getNews() {
         try {
             val result = apiService.getNews()
             if (result.body() != null) {
                 _news.postValue(result.body())
+            }
+        } catch (e: Exception) {
+            Log.d("Response", "Network error")
+        }
+    }
+
+    suspend fun getNewsWithCategory(category: String) {
+        try {
+            val result = apiService.getCategoryNews(category = category)
+            if (result.body() != null) {
+                _category.postValue(result.body())
             }
         } catch (e: Exception) {
             Log.d("Response", "Network error")

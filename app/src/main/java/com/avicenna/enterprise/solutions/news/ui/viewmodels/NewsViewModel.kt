@@ -9,14 +9,22 @@ import kotlinx.coroutines.launch
 
 class NewsViewModel(private val repository: NewsRepository) : ViewModel() {
     val news: LiveData<News> = repository.news
+    val category: LiveData<News> = repository.category
 
     init {
         getNews()
+        getNewsWithCategory("business")
     }
 
     fun getNews() {
         viewModelScope.launch {
             repository.getNews()
+        }
+    }
+
+    fun getNewsWithCategory(category: String) {
+        viewModelScope.launch {
+            repository.getNewsWithCategory(category)
         }
     }
 }

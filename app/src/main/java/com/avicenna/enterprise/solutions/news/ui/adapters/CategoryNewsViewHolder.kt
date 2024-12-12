@@ -1,0 +1,31 @@
+package com.avicenna.enterprise.solutions.news.ui.adapters
+
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.avicenna.enterprise.solutions.news.R
+import com.avicenna.enterprise.solutions.news.data.model.Article
+
+class CategoryNewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    var image: ImageView
+    var title: TextView
+    var author: TextView
+
+    init {
+        image = view.findViewById(R.id.iv_news)
+        title = view.findViewById(R.id.tv_title)
+        author = view.findViewById(R.id.tv_author)
+    }
+
+    fun bind(article: Article) {
+        image.load(article.urlToImage) {
+            crossfade(true)
+            placeholder(R.drawable.placeholder)
+            error(R.drawable.no_image)
+        }
+        title.text = article.title
+        author.text = article.author
+    }
+}

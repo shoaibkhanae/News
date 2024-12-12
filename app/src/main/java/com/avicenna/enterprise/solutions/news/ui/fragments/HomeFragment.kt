@@ -7,9 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.avicenna.enterprise.solutions.news.MyApplication
-import com.avicenna.enterprise.solutions.news.data.api.NewsApiService
-import com.avicenna.enterprise.solutions.news.data.api.RetrofitBuilder
-import com.avicenna.enterprise.solutions.news.data.repository.NewsRepository
 import com.avicenna.enterprise.solutions.news.databinding.FragmentHomeBinding
 import com.avicenna.enterprise.solutions.news.ui.adapters.LatestNewsAdapter
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.NewsViewModel
@@ -40,15 +37,49 @@ class HomeFragment : Fragment() {
     }
 
     private fun init() {
-        setupUI()
+        showNewsWithCategory()
+        setupLatestNewsUI()
+        setupCategoryNewsUI()
     }
 
-    private fun setupUI() {
+    private fun showNewsWithCategory() {
+        binding.chHealth.setOnClickListener {
+            viewModel.getNewsWithCategory("health")
+        }
+        binding.chSports.setOnClickListener {
+            viewModel.getNewsWithCategory("sports")
+        }
+        binding.chGeneral.setOnClickListener {
+            viewModel.getNewsWithCategory("general")
+        }
+        binding.chScience.setOnClickListener {
+            viewModel.getNewsWithCategory("science")
+        }
+        binding.chBusiness.setOnClickListener {
+            viewModel.getNewsWithCategory("business")
+        }
+        binding.chEntertainment.setOnClickListener {
+            viewModel.getNewsWithCategory("entertainment")
+        }
+        binding.chTechnology.setOnClickListener {
+            viewModel.getNewsWithCategory("technology")
+        }
+    }
+
+    private fun setupLatestNewsUI() {
         viewModel.news.observe(viewLifecycleOwner) {
-            val adapter = LatestNewsAdapter(it.articles)
+            val adapter = LatestNewsAdapter(it.articles, 1)
             binding.rvLatestNews.adapter = adapter
         }
     }
+
+    private fun setupCategoryNewsUI() {
+        viewModel.category.observe(viewLifecycleOwner) {
+            val adapter = LatestNewsAdapter(it.articles, 2)
+            binding.rvCategories.adapter = adapter
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
