@@ -72,4 +72,17 @@
             android:layout_height="match_parent"
             android:layout_marginTop="150dp"/>
     </ScrollView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_favorites"
+        android:backgroundTint="@color/md_theme_light_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/corner_padding"
+        android:layout_marginBottom="@dimen/corner_padding"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

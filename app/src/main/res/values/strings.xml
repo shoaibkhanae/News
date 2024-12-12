@@ -16,4 +16,5 @@
     <string name="search_about_your_favorite_topic">Search about your favorite topic</string>
     <string name="search_here">Search here</string>
     <string name="filter">Filter</string>
+    <string name="favorite">Favorite</string>
 </resources>
