@@ -45,6 +45,12 @@ class HomeFragment : Fragment() {
         binding.cdSearch.setOnClickListener {
             goToSearchFragment()
         }
+        binding.tvSeeAll.setOnClickListener {
+            goToSearchFragment()
+        }
+        binding.ivArrow.setOnClickListener {
+            goToSearchFragment()
+        }
     }
 
     private fun showNewsWithCategory() {

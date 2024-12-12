@@ -72,8 +72,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_arrorw"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_latest_news"
-        app:layout_constraintBottom_toBottomOf="@id/tv_latest_news"/>
+        app:layout_constraintTop_toTopOf="@id/tv_see_all"
+        app:layout_constraintBottom_toBottomOf="@id/tv_see_all"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_latest_news"

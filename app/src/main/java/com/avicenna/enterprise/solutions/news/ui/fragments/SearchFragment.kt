@@ -42,6 +42,7 @@ class SearchFragment : Fragment() {
     private fun init() {
         setupSearchFunctionality()
         setupUI()
+        showNewsWithCategory()
     }
 
     private fun setupSearchFunctionality() {
@@ -64,6 +65,31 @@ class SearchFragment : Fragment() {
             binding.rvSearch.adapter = adapter
         }
     }
+
+    private fun showNewsWithCategory() {
+        binding.chHealth.setOnClickListener {
+            searchViewModel.searchNewsWithCategory("health")
+        }
+        binding.chSports.setOnClickListener {
+            searchViewModel.searchNewsWithCategory("sports")
+        }
+        binding.chGeneral.setOnClickListener {
+            searchViewModel.searchNewsWithCategory("general")
+        }
+        binding.chScience.setOnClickListener {
+            searchViewModel.searchNewsWithCategory("science")
+        }
+        binding.chBusiness.setOnClickListener {
+            searchViewModel.searchNewsWithCategory("business")
+        }
+        binding.chEntertainment.setOnClickListener {
+            searchViewModel.searchNewsWithCategory("entertainment")
+        }
+        binding.chTechnology.setOnClickListener {
+            searchViewModel.searchNewsWithCategory("technology")
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

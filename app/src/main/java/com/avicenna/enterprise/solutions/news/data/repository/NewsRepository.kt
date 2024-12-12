@@ -48,4 +48,15 @@ class NewsRepository(private val apiService: NewsApiService) {
             Log.d("Response", "Network error")
         }
     }
+
+    suspend fun searchNewsWithCategory(category: String) {
+        try {
+            val result = apiService.getCategoryNews(category = category)
+            if (result.body() != null) {
+                _searched.postValue(result.body())
+            }
+        } catch (e: Exception) {
+            Log.d("Response", "Network error")
+        }
+    }
 }
