@@ -1,4 +1,4 @@
-package com.avicenna.enterprise.solutions.news.ui.adapters
+package com.avicenna.enterprise.solutions.news.ui.adapters.viewholders
 
 import android.view.View
 import android.widget.ImageView

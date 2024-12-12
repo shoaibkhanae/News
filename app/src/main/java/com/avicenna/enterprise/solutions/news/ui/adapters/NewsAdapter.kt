@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.data.model.Article
+import com.avicenna.enterprise.solutions.news.ui.adapters.viewholders.CategoryNewsViewHolder
+import com.avicenna.enterprise.solutions.news.ui.adapters.viewholders.LatestNewsViewHolder
 
-class LatestNewsAdapter(private val dataset: List<Article>, val type: Int)
+class NewsAdapter(private val dataset: List<Article>, val type: Int)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 

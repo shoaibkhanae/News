@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.databinding.FragmentHomeBinding
-import com.avicenna.enterprise.solutions.news.ui.adapters.LatestNewsAdapter
+import com.avicenna.enterprise.solutions.news.ui.adapters.NewsAdapter
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.NewsViewModel
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.NewsViewModelFactory
 
@@ -68,14 +68,14 @@ class HomeFragment : Fragment() {
 
     private fun setupLatestNewsUI() {
         viewModel.news.observe(viewLifecycleOwner) {
-            val adapter = LatestNewsAdapter(it.articles, 1)
+            val adapter = NewsAdapter(it.articles, 1)
             binding.rvLatestNews.adapter = adapter
         }
     }
 
     private fun setupCategoryNewsUI() {
         viewModel.category.observe(viewLifecycleOwner) {
-            val adapter = LatestNewsAdapter(it.articles, 2)
+            val adapter = NewsAdapter(it.articles, 2)
             binding.rvCategories.adapter = adapter
         }
     }

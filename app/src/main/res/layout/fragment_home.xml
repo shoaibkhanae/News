@@ -7,26 +7,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.HomeFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_search"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cd_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxCornerRadiusBottomStart="@dimen/corner_padding"
-        app:boxCornerRadiusTopStart="@dimen/corner_padding"
-        app:boxCornerRadiusBottomEnd="@dimen/corner_padding"
-        app:boxCornerRadiusTopEnd="@dimen/corner_padding"
+        android:layout_height="56dp"
+        app:cardCornerRadius="@dimen/corner_padding"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_search"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:imeOptions="actionSearch"
-            android:hint="@string/search" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="match_parent"
+            android:padding="@dimen/normal_padding">
+            
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_about_your_favorite_topic"
+                android:textSize="14sp"
+                android:layout_marginStart="@dimen/normal_padding"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search"
+                android:layout_marginEnd="@dimen/normal_padding"
+                android:padding="@dimen/small_padding"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/tv_latest_news"
@@ -36,8 +53,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/basic_padding"
-        app:layout_constraintTop_toBottomOf="@id/til_search"
-        app:layout_constraintStart_toStartOf="@id/til_search"/>
+        app:layout_constraintTop_toBottomOf="@id/cd_search"
+        app:layout_constraintStart_toStartOf="@id/cd_search"/>
 
     <TextView
         android:id="@+id/tv_see_all"
