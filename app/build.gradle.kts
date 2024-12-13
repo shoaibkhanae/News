@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -55,10 +56,13 @@ dependencies {
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
     // coil
-    implementation("io.coil-kt:coil:2.6.0")
+    implementation(libs.coil)
     // retrofit
     implementation(libs.square.retrofit)
     implementation(libs.retrofit.converter)
+    // Room
+    implementation(libs.androidx.room)
+    implementation(libs.androidx.room.coroutine)
 
 
     testImplementation(libs.junit)

@@ -20,6 +20,7 @@ import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModelFactory
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.SearchNewsViewModel
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.SearchNewsViweModelFactory
 import com.avicenna.enterprise.solutions.news.utils.Response
+import com.google.android.material.chip.Chip
 
 
 class SearchFragment : Fragment() {
@@ -44,6 +45,7 @@ class SearchFragment : Fragment() {
         val view = binding.root
         return view
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,14 +76,14 @@ class SearchFragment : Fragment() {
         searchViewModel.searched.observe(viewLifecycleOwner) {
             when(it) {
                 is Response.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    hideProgressbar()
                     setupAdapter(it.data!!.articles)
                 }
                 is Response.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    hideProgressbar()
                 }
                 is Response.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    showProgressbar()
                 }
             }
         }
@@ -94,7 +96,6 @@ class SearchFragment : Fragment() {
         adapter.articleSelectedListener = object : NewsAdapter.ArticleSelectedListener {
             override fun articleSelected(article: Article) {
                 homeViewModel.select(article)
-                binding.progressBar.visibility = View.GONEf
                 goToContentFragment()
             }
         }
@@ -104,27 +105,24 @@ class SearchFragment : Fragment() {
         findNavController().navigate(R.id.action_searchFragment_to_contentFragment)
     }
 
+    private fun showProgressbar() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressbar() {
+        binding.progressBar.visibility = View.GONE
+    }
+
     private fun showNewsWithCategory() {
-        binding.chHealth.setOnClickListener {
-            searchViewModel.searchNewsWithCategory("health")
-        }
-        binding.chSports.setOnClickListener {
-            searchViewModel.searchNewsWithCategory("sports")
-        }
-        binding.chGeneral.setOnClickListener {
-            searchViewModel.searchNewsWithCategory("general")
-        }
-        binding.chScience.setOnClickListener {
-            searchViewModel.searchNewsWithCategory("science")
-        }
-        binding.chBusiness.setOnClickListener {
-            searchViewModel.searchNewsWithCategory("business")
-        }
-        binding.chEntertainment.setOnClickListener {
-            searchViewModel.searchNewsWithCategory("entertainment")
-        }
-        binding.chTechnology.setOnClickListener {
-            searchViewModel.searchNewsWithCategory("technology")
+        binding.cgCategory.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId != -1) {
+                val selectedChip = group.findViewById<Chip>(checkedId)
+                var chipText = selectedChip?.text.toString()
+                if (chipText == "Filter") {
+                    chipText = "general"
+                }
+                searchViewModel.searchNewsWithCategory(chipText)
+            }
         }
     }
 
