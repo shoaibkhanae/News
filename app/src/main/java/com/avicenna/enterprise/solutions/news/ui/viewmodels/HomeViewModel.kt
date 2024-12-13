@@ -7,11 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.avicenna.enterprise.solutions.news.data.model.Article
 import com.avicenna.enterprise.solutions.news.data.model.News
 import com.avicenna.enterprise.solutions.news.data.repository.NewsRepository
+import com.avicenna.enterprise.solutions.news.utils.Response
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: NewsRepository) : ViewModel() {
-    val news: LiveData<News> = repository.news
-    val category: LiveData<News> = repository.category
+    val news: LiveData<Response<News>> = repository.news
+    val category: LiveData<Response<News>> = repository.category
 
     private val _selected = MutableLiveData<Article>()
     val selected: LiveData<Article> = _selected

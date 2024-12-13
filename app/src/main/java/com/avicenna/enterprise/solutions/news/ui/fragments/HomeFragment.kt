@@ -4,19 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.data.model.Article
-import com.avicenna.enterprise.solutions.news.data.model.News
 import com.avicenna.enterprise.solutions.news.databinding.FragmentHomeBinding
 import com.avicenna.enterprise.solutions.news.ui.adapters.NewsAdapter
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModel
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModelFactory
+import com.avicenna.enterprise.solutions.news.utils.Response
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -83,28 +82,64 @@ class HomeFragment : Fragment() {
 
     private fun setupLatestNewsUI() {
         homeViewModel.news.observe(viewLifecycleOwner) {
-            val adapter = NewsAdapter(it.articles, 1)
-            binding.rvLatestNews.adapter = adapter
-
-            adapter.articleSelectedListener = object : NewsAdapter.ArticleSelectedListener {
-                override fun articleSelected(article: Article) {
-                    homeViewModel.select(article)
-                    goToContentFragment()
+            when(it) {
+                is Response.Success -> {
+                    binding.pbLatest.visibility = View.GONE
+                    setupLatestAdapter(it?.data!!.articles)
                 }
+                is Response.Error -> {
+                    binding.pbLatest.visibility = View.GONE
+                    showToast(it.error!!)
+                }
+                is Response.Loading -> {
+                    binding.pbLatest.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun setupLatestAdapter(articles: List<Article>, type: Int = 1) {
+        val adapter = NewsAdapter(articles, type)
+        binding.rvLatestNews.adapter = adapter
+
+        adapter.articleSelectedListener = object : NewsAdapter.ArticleSelectedListener {
+            override fun articleSelected(article: Article) {
+                homeViewModel.select(article)
+                goToContentFragment()
             }
         }
     }
 
     private fun setupCategoryNewsUI() {
         homeViewModel.category.observe(viewLifecycleOwner) {
-            val adapter = NewsAdapter(it.articles, 2)
-            binding.rvCategories.adapter = adapter
-
-            adapter.articleSelectedListener = object : NewsAdapter.ArticleSelectedListener {
-                override fun articleSelected(article: Article) {
-                    homeViewModel.select(article)
-                    goToContentFragment()
+            when(it) {
+                is Response.Success -> {
+                    binding.pbCategory.visibility = View.GONE
+                    setupCategoryAdapter(it?.data!!.articles)
                 }
+                is Response.Error -> {
+                    binding.pbCategory.visibility = View.GONE
+                    showToast(it.error!!)
+                }
+                is Response.Loading -> {
+                    binding.pbCategory.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun setupCategoryAdapter(articles: List<Article>, type: Int = 2) {
+        val adapter = NewsAdapter(articles, type)
+        binding.rvCategories.adapter = adapter
+
+        adapter.articleSelectedListener = object : NewsAdapter.ArticleSelectedListener {
+            override fun articleSelected(article: Article) {
+                homeViewModel.select(article)
+                goToContentFragment()
             }
         }
     }

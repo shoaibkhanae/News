@@ -75,16 +75,32 @@
         app:layout_constraintTop_toTopOf="@id/tv_see_all"
         app:layout_constraintBottom_toBottomOf="@id/tv_see_all"/>
 
+
+    <ProgressBar
+        android:id="@+id/pb_latest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/md_theme_light_primary"
+        app:layout_constraintTop_toBottomOf="@id/tv_latest_news"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/hs_category_chip"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_latest_news"
         android:layout_width="match_parent"
         android:layout_height="@dimen/recycler_height"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_marginTop="@dimen/basic_padding"
-        app:layout_constraintTop_toBottomOf="@id/tv_latest_news"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tv_latest_news" />
 
     <HorizontalScrollView
         android:id="@+id/hs_category_chip"
@@ -194,6 +210,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <ProgressBar
+        android:id="@+id/pb_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/md_theme_light_primary"
+        app:layout_constraintTop_toBottomOf="@id/hs_category_chip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

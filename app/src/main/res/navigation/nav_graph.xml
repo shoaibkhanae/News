@@ -23,7 +23,13 @@
         android:id="@+id/searchFragment"
         android:name="com.avicenna.enterprise.solutions.news.ui.fragments.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_contentFragment"
+            app:destination="@id/contentFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/contentFragment"
         android:name="com.avicenna.enterprise.solutions.news.ui.fragments.ContentFragment"
