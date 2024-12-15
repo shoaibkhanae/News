@@ -35,4 +35,9 @@
         android:name="com.avicenna.enterprise.solutions.news.ui.fragments.ContentFragment"
         android:label="fragment_content"
         tools:layout="@layout/fragment_content" />
+    <fragment
+        android:id="@+id/favoriteFragment2"
+        android:name="com.avicenna.enterprise.solutions.news.ui.fragments.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

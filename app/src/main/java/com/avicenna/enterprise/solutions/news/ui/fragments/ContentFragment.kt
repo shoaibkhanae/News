@@ -10,9 +10,10 @@ import androidx.transition.TransitionInflater
 import coil.load
 import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.R
+import com.avicenna.enterprise.solutions.news.data.local.Article
 import com.avicenna.enterprise.solutions.news.databinding.FragmentContentBinding
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModel
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModelFactory
+import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModel
+import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModelFactory
 
 
 class ContentFragment : Fragment() {
@@ -20,8 +21,8 @@ class ContentFragment : Fragment() {
     val binding
         get() = _binding!!
 
-    private val homeViewModel: HomeViewModel by activityViewModels {
-        HomeViewModelFactory((requireActivity().application as MyApplication).repository)
+    private val shareViewModel: MainViewModel by activityViewModels {
+        MainViewModelFactory((requireActivity().application as MyApplication).repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +47,11 @@ class ContentFragment : Fragment() {
 
     private fun init() {
         showArticleContent()
+        binding.btnFavorite.setOnClickListener { addToFavorite() }
     }
 
     private fun showArticleContent() {
-        homeViewModel.selected.observe(viewLifecycleOwner) { article ->
+        shareViewModel.selected.observe(viewLifecycleOwner) { article ->
             binding.apply {
                 ivNews.load(article.urlToImage) {
                     crossfade(true)
@@ -60,6 +62,13 @@ class ContentFragment : Fragment() {
                 tvAuthor.text = article.author
                 tvContent.text = article.content
             }
+        }
+    }
+
+    private fun addToFavorite() {
+        shareViewModel.selected.observe(viewLifecycleOwner) {
+            val article = Article(imageUrl = it.urlToImage, title = it.title)
+            shareViewModel.insert(article)
         }
     }
 

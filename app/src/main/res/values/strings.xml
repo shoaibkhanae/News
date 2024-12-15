@@ -17,4 +17,5 @@
     <string name="search_here">Search here</string>
     <string name="filter">Filter</string>
     <string name="favorite">Favorite</string>
+    <string name="home">Home</string>
 </resources>

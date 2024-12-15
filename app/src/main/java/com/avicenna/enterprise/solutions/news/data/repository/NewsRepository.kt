@@ -1,13 +1,19 @@
 package com.avicenna.enterprise.solutions.news.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.avicenna.enterprise.solutions.news.data.api.NewsApiService
+import com.avicenna.enterprise.solutions.news.data.local.Article
+import com.avicenna.enterprise.solutions.news.data.local.ArticleDao
 import com.avicenna.enterprise.solutions.news.data.model.News
 import com.avicenna.enterprise.solutions.news.utils.Response
+import kotlinx.coroutines.flow.Flow
 
-class NewsRepository(private val apiService: NewsApiService) {
+class NewsRepository(
+    private val apiService: NewsApiService,
+    private val articleDao: ArticleDao
+) {
+
     private val _news = MutableLiveData<Response<News>>()
     val news: LiveData<Response<News>> = _news
 
@@ -16,6 +22,8 @@ class NewsRepository(private val apiService: NewsApiService) {
 
     private val _searched = MutableLiveData<Response<News>>()
     val searched: LiveData<Response<News>> = _searched
+
+    val articles: Flow<List<Article>> = articleDao.getAllArticles()
 
     suspend fun getNews() {
         _news.postValue(Response.Loading())
@@ -63,5 +71,14 @@ class NewsRepository(private val apiService: NewsApiService) {
         } catch (e: Exception) {
             _searched.postValue(Response.Error(e.message.toString()))
         }
+    }
+
+
+    suspend fun insert(article: Article) {
+        articleDao.insertArticle(article)
+    }
+
+    suspend fun delete(article: Article) {
+        articleDao.deleteArticle(article)
     }
 }
