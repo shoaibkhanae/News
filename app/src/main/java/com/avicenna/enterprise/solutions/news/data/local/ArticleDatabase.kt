@@ -9,7 +9,9 @@ import androidx.room.RoomDatabase
 abstract class ArticleDatabase: RoomDatabase() {
 
     abstract fun getArticleDao(): ArticleDao
+
     companion object {
+        @Volatile
         private var INSTANCE: ArticleDatabase? = null
 
         fun getDatabase(context: Context): ArticleDatabase {

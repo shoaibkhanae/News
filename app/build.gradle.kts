@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.ksp)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -54,7 +54,7 @@ dependencies {
     // viewmodel
     implementation(libs.androidx.lifecycle.viewmodel)
     // coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+    implementation(libs.kotlinx.coroutines.android)
     // coil
     implementation(libs.coil)
     // retrofit
@@ -63,6 +63,9 @@ dependencies {
     // Room
     implementation(libs.androidx.room)
     implementation(libs.androidx.room.coroutine)
+    // ksp
+    ksp(libs.androidx.room.compiler)
+
 
 
     testImplementation(libs.junit)

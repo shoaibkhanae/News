@@ -13,17 +13,18 @@ import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.data.model.Article
 import com.avicenna.enterprise.solutions.news.databinding.FragmentHomeBinding
 import com.avicenna.enterprise.solutions.news.ui.adapters.NewsAdapter
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModel
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModelFactory
+import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModel
+import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModelFactory
 import com.avicenna.enterprise.solutions.news.utils.Response
+import com.google.android.material.chip.Chip
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     val binding
         get() = _binding!!
 
-    private val homeViewModel: HomeViewModel by activityViewModels {
-        HomeViewModelFactory((requireActivity().application as MyApplication).repository)
+    private val shareViewModel: MainViewModel by activityViewModels {
+        MainViewModelFactory((requireActivity().application as MyApplication).repository)
     }
 
     override fun onCreateView(
@@ -57,35 +58,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun showNewsWithCategory() {
-        binding.chHealth.setOnClickListener {
-            homeViewModel.getNewsWithCategory("health")
-        }
-        binding.chSports.setOnClickListener {
-            homeViewModel.getNewsWithCategory("sports")
-        }
-        binding.chGeneral.setOnClickListener {
-            homeViewModel.getNewsWithCategory("general")
-        }
-        binding.chScience.setOnClickListener {
-            homeViewModel.getNewsWithCategory("science")
-        }
-        binding.chBusiness.setOnClickListener {
-            homeViewModel.getNewsWithCategory("business")
-        }
-        binding.chEntertainment.setOnClickListener {
-            homeViewModel.getNewsWithCategory("entertainment")
-        }
-        binding.chTechnology.setOnClickListener {
-            homeViewModel.getNewsWithCategory("technology")
+        binding.cgCategory.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId != -1) {
+                val selectedChip = group.findViewById<Chip>(checkedId)
+                shareViewModel.getNewsWithCategory(selectedChip.text.toString())
+            }
         }
     }
 
     private fun setupLatestNewsUI() {
-        homeViewModel.news.observe(viewLifecycleOwner) {
+        shareViewModel.news.observe(viewLifecycleOwner) {
             when(it) {
                 is Response.Success -> {
                     binding.pbLatest.visibility = View.GONE
-                    setupLatestAdapter(it?.data!!.articles)
+                    setupLatestAdapter(it.data!!.articles)
                 }
                 is Response.Error -> {
                     binding.pbLatest.visibility = View.GONE
@@ -108,18 +94,18 @@ class HomeFragment : Fragment() {
 
         adapter.articleSelectedListener = object : NewsAdapter.ArticleSelectedListener {
             override fun articleSelected(article: Article) {
-                homeViewModel.select(article)
+                shareViewModel.select(article)
                 goToContentFragment()
             }
         }
     }
 
     private fun setupCategoryNewsUI() {
-        homeViewModel.category.observe(viewLifecycleOwner) {
+        shareViewModel.category.observe(viewLifecycleOwner) {
             when(it) {
                 is Response.Success -> {
                     binding.pbCategory.visibility = View.GONE
-                    setupCategoryAdapter(it?.data!!.articles)
+                    setupCategoryAdapter(it.data!!.articles)
                 }
                 is Response.Error -> {
                     binding.pbCategory.visibility = View.GONE
@@ -138,7 +124,7 @@ class HomeFragment : Fragment() {
 
         adapter.articleSelectedListener = object : NewsAdapter.ArticleSelectedListener {
             override fun articleSelected(article: Article) {
-                homeViewModel.select(article)
+                shareViewModel.select(article)
                 goToContentFragment()
             }
         }

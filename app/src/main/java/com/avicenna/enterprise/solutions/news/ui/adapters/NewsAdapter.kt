@@ -14,7 +14,6 @@ import com.google.android.material.card.MaterialCardView
 class NewsAdapter(private val dataset: List<Article>, val type: Int)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
     inner class CategoryNewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var image: ImageView
         var title: TextView

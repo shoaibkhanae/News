@@ -8,17 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.data.model.Article
 import com.avicenna.enterprise.solutions.news.databinding.FragmentSearchBinding
 import com.avicenna.enterprise.solutions.news.ui.adapters.NewsAdapter
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModel
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.HomeViewModelFactory
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.SearchNewsViewModel
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.SearchNewsViweModelFactory
+import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModel
+import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModelFactory
 import com.avicenna.enterprise.solutions.news.utils.Response
 import com.google.android.material.chip.Chip
 
@@ -28,12 +25,8 @@ class SearchFragment : Fragment() {
     val binding
         get() = _binding!!
 
-    private val searchViewModel: SearchNewsViewModel by viewModels {
-        SearchNewsViweModelFactory((requireActivity().application as MyApplication).repository)
-    }
-
-    private val homeViewModel: HomeViewModel by activityViewModels {
-        HomeViewModelFactory((requireActivity().application as MyApplication).repository)
+    private val shareViewModel: MainViewModel by activityViewModels {
+        MainViewModelFactory((requireActivity().application as MyApplication).repository)
     }
 
     override fun onCreateView(
@@ -66,14 +59,14 @@ class SearchFragment : Fragment() {
 
             override fun afterTextChanged(text: Editable?) {
                 if (text != null) {
-                    searchViewModel.searchNews(text.toString())
+                    shareViewModel.searchNews(text.toString())
                 }
             }
         })
     }
 
     private fun setupUI() {
-        searchViewModel.searched.observe(viewLifecycleOwner) {
+        shareViewModel.searched.observe(viewLifecycleOwner) {
             when(it) {
                 is Response.Success -> {
                     hideProgressbar()
@@ -95,7 +88,7 @@ class SearchFragment : Fragment() {
 
         adapter.articleSelectedListener = object : NewsAdapter.ArticleSelectedListener {
             override fun articleSelected(article: Article) {
-                homeViewModel.select(article)
+                shareViewModel.select(article)
                 goToContentFragment()
             }
         }
@@ -121,7 +114,7 @@ class SearchFragment : Fragment() {
                 if (chipText == "Filter") {
                     chipText = "general"
                 }
-                searchViewModel.searchNewsWithCategory(chipText)
+                shareViewModel.searchNewsWithCategory(chipText)
             }
         }
     }
