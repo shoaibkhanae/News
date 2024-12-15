@@ -3,9 +3,9 @@ package com.avicenna.enterprise.solutions.news.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.avicenna.enterprise.solutions.news.data.api.NewsApiService
-import com.avicenna.enterprise.solutions.news.data.local.Article
-import com.avicenna.enterprise.solutions.news.data.local.ArticleDao
-import com.avicenna.enterprise.solutions.news.data.model.News
+import com.avicenna.enterprise.solutions.news.data.db.ArticleDao
+import com.avicenna.enterprise.solutions.news.data.models.Article
+import com.avicenna.enterprise.solutions.news.data.models.News
 import com.avicenna.enterprise.solutions.news.utils.Response
 import kotlinx.coroutines.flow.Flow
 

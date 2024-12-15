@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.transition.TransitionInflater
 import coil.load
 import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.R
-import com.avicenna.enterprise.solutions.news.data.local.Article
 import com.avicenna.enterprise.solutions.news.databinding.FragmentContentBinding
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModel
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModelFactory
@@ -67,9 +67,13 @@ class ContentFragment : Fragment() {
 
     private fun addToFavorite() {
         shareViewModel.selected.observe(viewLifecycleOwner) {
-            val article = Article(imageUrl = it.urlToImage, title = it.title)
-            shareViewModel.insert(article)
+            shareViewModel.insert(it)
+            showToast()
         }
+    }
+
+    private fun showToast() {
+        Toast.makeText(requireContext(), "Added favorites", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

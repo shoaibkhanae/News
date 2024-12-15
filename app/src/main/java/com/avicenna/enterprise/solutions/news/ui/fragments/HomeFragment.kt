@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.R
-import com.avicenna.enterprise.solutions.news.data.model.Article
+import com.avicenna.enterprise.solutions.news.data.models.Article
 import com.avicenna.enterprise.solutions.news.databinding.FragmentHomeBinding
 import com.avicenna.enterprise.solutions.news.ui.adapters.NewsAdapter
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModel

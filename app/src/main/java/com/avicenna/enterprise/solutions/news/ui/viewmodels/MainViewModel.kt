@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.avicenna.enterprise.solutions.news.data.model.Article
-import com.avicenna.enterprise.solutions.news.data.model.News
+import com.avicenna.enterprise.solutions.news.data.models.Article
+import com.avicenna.enterprise.solutions.news.data.models.News
 import com.avicenna.enterprise.solutions.news.data.repository.NewsRepository
 import com.avicenna.enterprise.solutions.news.utils.Response
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,7 @@ class MainViewModel(private val repository: NewsRepository) : ViewModel() {
     val news: LiveData<Response<News>> = repository.news
     val category: LiveData<Response<News>> = repository.category
     val searched: LiveData<Response<News>> = repository.searched
-    val favorites: LiveData<List<com.avicenna.enterprise.solutions.news.data.local.Article>> = repository.articles.asLiveData()
+    val favorites: LiveData<List<Article>> = repository.articles.asLiveData()
 
     private val _selected = MutableLiveData<Article>()
     val selected: LiveData<Article> = _selected
@@ -56,13 +56,13 @@ class MainViewModel(private val repository: NewsRepository) : ViewModel() {
     }
 
 
-    fun insert(article: com.avicenna.enterprise.solutions.news.data.local.Article) {
+    fun insert(article: Article) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insert(article)
         }
     }
 
-    fun delete(article: com.avicenna.enterprise.solutions.news.data.local.Article) {
+    fun delete(article: Article) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.delete(article)
         }

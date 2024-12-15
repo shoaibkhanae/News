@@ -4,19 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.avicenna.enterprise.solutions.news.R
-import com.avicenna.enterprise.solutions.news.data.local.Article
+import com.avicenna.enterprise.solutions.news.data.models.Article
 
 
 class FavoriteAdapter:
     ListAdapter<Article, FavoriteAdapter.FavoriteViewHolder>(ArticleComparator()) {
 
-    class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        class FavoriteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var image: ImageView
 
         init {
@@ -24,7 +23,7 @@ class FavoriteAdapter:
         }
 
         fun bind(article: Article) {
-            image.load(article.imageUrl) {
+            image.load(article.urlToImage) {
                 crossfade(true)
                 error(R.drawable.news_placeholder)
                 placeholder(R.drawable.placeholder)
@@ -40,6 +39,16 @@ class FavoriteAdapter:
         }
     }
 
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    private var onItemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.onItemClickListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         return FavoriteViewHolder.create(parent)
     }
@@ -47,6 +56,10 @@ class FavoriteAdapter:
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current)
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.onItemClick(position)
+        }
     }
 
     class ArticleComparator: DiffUtil.ItemCallback<Article>() {

@@ -82,7 +82,7 @@
         android:backgroundTint="@color/md_theme_light_primary"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="@dimen/corner_padding"
-        android:layout_marginBottom="@dimen/corner_padding"
+        android:layout_marginBottom="88dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

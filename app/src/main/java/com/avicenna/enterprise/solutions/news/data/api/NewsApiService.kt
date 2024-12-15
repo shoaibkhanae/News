@@ -1,6 +1,6 @@
 package com.avicenna.enterprise.solutions.news.data.api
 
-import com.avicenna.enterprise.solutions.news.data.model.News
+import com.avicenna.enterprise.solutions.news.data.models.News
 import com.avicenna.enterprise.solutions.news.utils.AppConstants
 import retrofit2.Response
 import retrofit2.http.GET

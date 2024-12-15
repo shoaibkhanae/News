@@ -1,10 +1,11 @@
-package com.avicenna.enterprise.solutions.news.data.local
+package com.avicenna.enterprise.solutions.news.data.db
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.avicenna.enterprise.solutions.news.data.models.Article
 import kotlinx.coroutines.flow.Flow
 
 @Dao

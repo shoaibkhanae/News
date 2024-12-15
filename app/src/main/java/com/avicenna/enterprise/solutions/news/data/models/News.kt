@@ -1,4 +1,4 @@
-package com.avicenna.enterprise.solutions.news.data.model
+package com.avicenna.enterprise.solutions.news.data.models
 
 import com.google.gson.annotations.SerializedName
 

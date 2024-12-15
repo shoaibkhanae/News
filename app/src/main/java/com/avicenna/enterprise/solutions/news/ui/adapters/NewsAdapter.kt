@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.avicenna.enterprise.solutions.news.R
-import com.avicenna.enterprise.solutions.news.data.model.Article
+import com.avicenna.enterprise.solutions.news.data.models.Article
 import com.google.android.material.card.MaterialCardView
 
 class NewsAdapter(private val dataset: List<Article>, val type: Int)
