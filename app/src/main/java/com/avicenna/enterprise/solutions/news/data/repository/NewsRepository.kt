@@ -8,8 +8,9 @@ import com.avicenna.enterprise.solutions.news.data.models.Article
 import com.avicenna.enterprise.solutions.news.data.models.News
 import com.avicenna.enterprise.solutions.news.utils.Response
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class NewsRepository(
+class NewsRepository @Inject constructor(
     private val apiService: NewsApiService,
     private val articleDao: ArticleDao
 ) {

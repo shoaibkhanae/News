@@ -8,13 +8,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.data.models.Article
 import com.avicenna.enterprise.solutions.news.databinding.FragmentHomeBinding
 import com.avicenna.enterprise.solutions.news.ui.adapters.NewsAdapter
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModel
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModelFactory
 import com.avicenna.enterprise.solutions.news.utils.Response
 import com.google.android.material.chip.Chip
 
@@ -23,9 +21,8 @@ class HomeFragment : Fragment() {
     val binding
         get() = _binding!!
 
-    private val shareViewModel: MainViewModel by activityViewModels {
-        MainViewModelFactory((requireActivity().application as MyApplication).repository)
-    }
+    private val shareViewModel: MainViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

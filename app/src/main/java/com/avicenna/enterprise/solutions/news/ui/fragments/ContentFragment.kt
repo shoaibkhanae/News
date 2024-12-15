@@ -9,11 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.transition.TransitionInflater
 import coil.load
-import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.databinding.FragmentContentBinding
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModel
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModelFactory
 
 
 class ContentFragment : Fragment() {
@@ -21,9 +19,7 @@ class ContentFragment : Fragment() {
     val binding
         get() = _binding!!
 
-    private val shareViewModel: MainViewModel by activityViewModels {
-        MainViewModelFactory((requireActivity().application as MyApplication).repository)
-    }
+    private val shareViewModel: MainViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

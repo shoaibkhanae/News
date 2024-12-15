@@ -9,10 +9,14 @@ import com.avicenna.enterprise.solutions.news.data.models.Article
 import com.avicenna.enterprise.solutions.news.data.models.News
 import com.avicenna.enterprise.solutions.news.data.repository.NewsRepository
 import com.avicenna.enterprise.solutions.news.utils.Response
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val repository: NewsRepository) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel() {
+
     val news: LiveData<Response<News>> = repository.news
     val category: LiveData<Response<News>> = repository.category
     val searched: LiveData<Response<News>> = repository.searched

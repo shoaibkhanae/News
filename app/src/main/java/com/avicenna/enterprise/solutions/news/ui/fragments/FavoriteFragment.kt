@@ -4,25 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.avicenna.enterprise.solutions.news.MyApplication
 import com.avicenna.enterprise.solutions.news.R
 import com.avicenna.enterprise.solutions.news.databinding.FragmentFavoriteBinding
 import com.avicenna.enterprise.solutions.news.ui.adapters.FavoriteAdapter
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModel
-import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModelFactory
 
 class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     val binding
         get() = _binding!!
 
-    private val shareViewModel: MainViewModel by activityViewModels {
-        MainViewModelFactory((requireActivity().application as MyApplication).repository)
-    }
+    private val shareViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

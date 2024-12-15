@@ -1,14 +1,7 @@
 package com.avicenna.enterprise.solutions.news
 
 import android.app.Application
-import com.avicenna.enterprise.solutions.news.data.api.NewsApiService
-import com.avicenna.enterprise.solutions.news.data.api.RetrofitBuilder
-import com.avicenna.enterprise.solutions.news.data.db.ArticleDatabase
-import com.avicenna.enterprise.solutions.news.data.repository.NewsRepository
+import dagger.hilt.android.HiltAndroidApp
 
-class MyApplication : Application() {
-    private val api by lazy { RetrofitBuilder.getInstance().create(NewsApiService::class.java) }
-    private val db by lazy { ArticleDatabase.getDatabase(this) }
-    private val dao by lazy { db.getArticleDao() }
-    val repository by lazy { NewsRepository(api, dao) }
-}
+@HiltAndroidApp
+class MyApplication : Application()
