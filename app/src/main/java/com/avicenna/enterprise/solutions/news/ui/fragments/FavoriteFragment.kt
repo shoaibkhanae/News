@@ -36,6 +36,11 @@ class FavoriteFragment : Fragment() {
 
     private fun init() {
         setupUI()
+        binding.appBar.setNavigationOnClickListener { goToHomeFragment() }
+    }
+
+    private fun goToHomeFragment() {
+        findNavController().navigate(R.id.action_favoriteFragment2_to_homeFragment)
     }
 
     private fun setupUI() {

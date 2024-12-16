@@ -25,7 +25,6 @@ class SearchFragment : Fragment() {
 
     private val shareViewModel: MainViewModel by activityViewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

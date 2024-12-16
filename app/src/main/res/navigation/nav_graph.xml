@@ -43,5 +43,10 @@
         <action
             android:id="@+id/action_favoriteFragment2_to_contentFragment"
             app:destination="@id/contentFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment2_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@string/home"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>
