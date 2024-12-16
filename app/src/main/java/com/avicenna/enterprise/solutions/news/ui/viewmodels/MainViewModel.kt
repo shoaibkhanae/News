@@ -21,6 +21,8 @@ class MainViewModel @Inject constructor(private val repository: NewsRepository) 
     val category: LiveData<Response<News>> = repository.category
     val searched: LiveData<Response<News>> = repository.searched
     val favorites: LiveData<List<Article>> = repository.articles.asLiveData()
+    private val _existing = MutableLiveData<List<Article>>()
+    val existing: LiveData<List<Article>> = _existing
 
     private val _selected = MutableLiveData<Article>()
     val selected: LiveData<Article> = _selected
@@ -72,4 +74,9 @@ class MainViewModel @Inject constructor(private val repository: NewsRepository) 
         }
     }
 
+    fun checkArticleExists(title: String) {
+        viewModelScope.launch {
+            _existing.value = repository.checkArticleExists(title)
+        }
+    }
 }

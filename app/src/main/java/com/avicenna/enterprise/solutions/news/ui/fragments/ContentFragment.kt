@@ -1,6 +1,7 @@
 package com.avicenna.enterprise.solutions.news.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.transition.TransitionInflater
 import coil.load
 import com.avicenna.enterprise.solutions.news.R
+import com.avicenna.enterprise.solutions.news.data.models.Article
 import com.avicenna.enterprise.solutions.news.databinding.FragmentContentBinding
 import com.avicenna.enterprise.solutions.news.ui.viewmodels.MainViewModel
 
@@ -63,13 +65,22 @@ class ContentFragment : Fragment() {
 
     private fun addToFavorite() {
         shareViewModel.selected.observe(viewLifecycleOwner) {
-            shareViewModel.insert(it)
-            showToast()
+            checkAndAddToFavorites(it)
         }
     }
 
-    private fun showToast() {
-        Toast.makeText(requireContext(), "Added favorites", Toast.LENGTH_SHORT).show()
+    private fun checkAndAddToFavorites(article: Article) {
+        shareViewModel.checkArticleExists(article.title!!)
+        shareViewModel.existing.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                shareViewModel.insert(article)
+                showToast("Added Favorites")
+            }
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

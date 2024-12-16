@@ -79,6 +79,8 @@ class NewsRepository @Inject constructor(
         articleDao.insertArticle(article)
     }
 
+    suspend fun checkArticleExists(title: String): List<Article> = articleDao.getArticleByTitle(title)
+
     suspend fun delete(article: Article) {
         articleDao.deleteArticle(article)
     }
